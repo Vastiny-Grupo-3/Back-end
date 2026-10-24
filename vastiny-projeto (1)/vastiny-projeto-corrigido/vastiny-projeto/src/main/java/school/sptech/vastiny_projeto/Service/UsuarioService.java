@@ -5,6 +5,7 @@ import school.sptech.vastiny_projeto.Exception.NaoEncontradoException;
 import school.sptech.vastiny_projeto.Repository.UsuarioRepository;
 import school.sptech.vastiny_projeto.entity.Usuario;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -29,6 +30,8 @@ public class UsuarioService {
 
     //Post
     public Usuario criar(Usuario usuario){
+
+        usuario.setDataCadastro(LocalDateTime.now());
         return usuarioRepository.save(usuario);
 
     }
