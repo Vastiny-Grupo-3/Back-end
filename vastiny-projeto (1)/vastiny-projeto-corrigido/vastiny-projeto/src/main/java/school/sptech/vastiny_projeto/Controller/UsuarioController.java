@@ -1,7 +1,6 @@
 package school.sptech.vastiny_projeto.Controller;
 
 
-import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

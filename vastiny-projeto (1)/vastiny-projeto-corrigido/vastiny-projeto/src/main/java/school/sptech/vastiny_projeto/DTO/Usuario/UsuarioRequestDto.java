@@ -12,7 +12,6 @@ public class UsuarioRequestDto {
     private String email;
 
     @NotBlank
-    @Min(6)
     private String senha;
 
     public UsuarioRequestDto() {
