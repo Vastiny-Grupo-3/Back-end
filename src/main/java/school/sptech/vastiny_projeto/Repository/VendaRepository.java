@@ -12,8 +12,8 @@ public interface VendaRepository extends JpaRepository<Venda,Integer> {
 
     @Query("""
 SELECT COUNT(v)   AS totalVendas,
-   COALESCE(SUM(v.valortotal), 0) AS faturamento,
-   COALESCE(SUM(v.valorlucro), 0) AS lucro
+   COALESCE(SUM(v.valorTotal), 0) AS faturamento,
+   COALESCE(SUM(v.valorLucro), 0) AS lucro
    FROM Venda v
    WHERE v.dataHora >= :inicio AND v.dataHora < :fim
 """)
