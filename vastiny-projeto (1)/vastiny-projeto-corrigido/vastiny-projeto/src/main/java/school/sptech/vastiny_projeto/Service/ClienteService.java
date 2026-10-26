@@ -6,6 +6,7 @@ import school.sptech.vastiny_projeto.Exception.NaoEncontradoException;
 import school.sptech.vastiny_projeto.Repository.ClienteRepository;
 import school.sptech.vastiny_projeto.entity.Cliente;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,6 +32,7 @@ public class ClienteService {
 
     //Post
     public Cliente criar(Cliente cliente){
+        cliente.setDataCadastro(LocalDateTime.now());
         return clienteRepository.save(cliente);
     }
 

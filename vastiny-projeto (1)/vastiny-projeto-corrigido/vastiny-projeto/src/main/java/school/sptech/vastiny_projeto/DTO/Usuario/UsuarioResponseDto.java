@@ -2,6 +2,8 @@ package school.sptech.vastiny_projeto.DTO.Usuario;
 
 public class UsuarioResponseDto {
 
+    private Integer id;
+
     private String nome;
 
     private String email;
@@ -9,7 +11,8 @@ public class UsuarioResponseDto {
     public UsuarioResponseDto() {
     }
 
-    public UsuarioResponseDto(String nome, String email) {
+    public UsuarioResponseDto(Integer id, String nome, String email) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
     }
@@ -28,5 +31,13 @@ public class UsuarioResponseDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

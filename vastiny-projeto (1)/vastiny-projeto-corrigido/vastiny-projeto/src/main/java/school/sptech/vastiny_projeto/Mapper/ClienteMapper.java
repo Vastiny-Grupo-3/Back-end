@@ -14,6 +14,7 @@ public class ClienteMapper {
             Cliente cliente = new Cliente();
             cliente.setNome(request.getNome());
             cliente.setTelefone(request.getTelefone());
+            cliente.setDescricao(request.getDescricao());
 
             return cliente;
     }
@@ -24,6 +25,8 @@ public class ClienteMapper {
         dto.setId(cliente.getId());
         dto.setNome(cliente.getNome());
         dto.setTelefone(cliente.getTelefone());
+        dto.setDescricao(cliente.getDescricao());
+        dto.setDataCadastro(cliente.getDataCadastro());
 
         return dto;
 

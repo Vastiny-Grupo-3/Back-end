@@ -22,6 +22,7 @@ public class UsuarioMapper {
 
     public static UsuarioResponseDto toResponse(Usuario usuario){
         UsuarioResponseDto dto = new UsuarioResponseDto();
+        dto.setId(usuario.getId());
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
 

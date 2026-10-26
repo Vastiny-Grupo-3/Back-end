@@ -1,5 +1,7 @@
 package school.sptech.vastiny_projeto.DTO.Clientes;
 
+import java.time.LocalDateTime;
+
 public class ClienteResponseDto {
 
 
@@ -9,13 +11,20 @@ public class ClienteResponseDto {
 
     private String telefone;
 
+    private String descricao;
+
+    private LocalDateTime dataCadastro;
+
+
     public ClienteResponseDto() {
     }
 
-    public ClienteResponseDto(Integer id, String nome, String telefone) {
+    public ClienteResponseDto(Integer id, String nome, String telefone, String descricao, LocalDateTime dataCadastro) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
+        this.descricao = descricao;
+        this.dataCadastro = dataCadastro;
     }
 
     public Integer getId() {
@@ -41,4 +50,22 @@ public class ClienteResponseDto {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public LocalDateTime getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+
 }
