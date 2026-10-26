@@ -12,7 +12,7 @@ public class UsuarioRequestDto {
     private String email;
 
     @NotBlank
-    @Min(6)
+    @Size(min=8)
     private String senha;
 
     public UsuarioRequestDto() {

@@ -11,13 +11,17 @@ public class ClienteRequestDto {
     @NotNull
     private String telefone;
 
+    @NotNull
+    private String descricao;
+
 
     public ClienteRequestDto() {
     }
 
-    public ClienteRequestDto(String nome, String telefone) {
+    public ClienteRequestDto(String nome, String telefone, String descricao) {
         this.nome = nome;
         this.telefone = telefone;
+        this.descricao = descricao;
     }
 
     public String getNome() {
@@ -34,5 +38,13 @@ public class ClienteRequestDto {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
