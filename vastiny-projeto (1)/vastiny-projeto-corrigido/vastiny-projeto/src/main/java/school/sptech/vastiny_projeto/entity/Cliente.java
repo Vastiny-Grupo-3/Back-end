@@ -2,6 +2,8 @@ package school.sptech.vastiny_projeto.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Cliente {
 
@@ -13,13 +15,19 @@ public class Cliente {
 
     private String telefone;
 
+    private String descricao;
+
+    private LocalDateTime dataCadastro;
+
     public Cliente() {
     }
 
-    public Cliente(Integer id, String nome, String telefone) {
+    public Cliente(Integer id, String nome, String telefone, String descricao, LocalDateTime dataCadastro) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
+        this.descricao = descricao;
+        this.dataCadastro = dataCadastro;
     }
 
     public Integer getId() {
@@ -44,5 +52,24 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void set() {
+    }
+
+    public LocalDateTime getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 }
