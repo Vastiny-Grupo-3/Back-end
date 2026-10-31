@@ -4,15 +4,15 @@ import jakarta.validation.constraints.*;
 
 public class UsuarioRequestDto {
 
-    @NotBlank
+    @NotBlank(message = "Informe o nome de usuário.")
     private String nome;
 
-    @NotBlank
-    @Email
+    @NotBlank(message = "Informe o e-mail")
+    @Email(message = "Informe um e-mail válido")
     private String email;
 
-    @NotBlank
-    @Size(min=8)
+
+    @Pattern(regexp = "^(?=.*[A-Za-zÀ-ÿ])(?=.*\\d).{8,}$", message = "A senha não atende aos requesitos de segurança.")
     private String senha;
 
     public UsuarioRequestDto() {

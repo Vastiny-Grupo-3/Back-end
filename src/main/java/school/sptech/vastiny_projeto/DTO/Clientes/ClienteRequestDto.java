@@ -2,26 +2,29 @@ package school.sptech.vastiny_projeto.DTO.Clientes;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import school.sptech.vastiny_projeto.Enums.TipoCliente;
 
 public class ClienteRequestDto {
 
     @NotBlank
     private String nome;
 
-    @NotNull
+    @NotBlank
     private String telefone;
 
-    @NotNull
     private String descricao;
+
+    private TipoCliente tipo;
 
 
     public ClienteRequestDto() {
     }
 
-    public ClienteRequestDto(String nome, String telefone, String descricao) {
+    public ClienteRequestDto(String nome, String telefone, String descricao, TipoCliente tipo) {
         this.nome = nome;
         this.telefone = telefone;
         this.descricao = descricao;
+        this.tipo = tipo;
     }
 
     public String getNome() {
@@ -46,5 +49,13 @@ public class ClienteRequestDto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public TipoCliente getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoCliente tipo) {
+        this.tipo = tipo;
     }
 }

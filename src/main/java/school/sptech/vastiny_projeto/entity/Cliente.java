@@ -1,6 +1,7 @@
 package school.sptech.vastiny_projeto.entity;
 
 import jakarta.persistence.*;
+import school.sptech.vastiny_projeto.Enums.TipoCliente;
 
 import java.time.LocalDateTime;
 
@@ -17,16 +18,20 @@ public class Cliente {
 
     private String descricao;
 
+    @Enumerated(EnumType.STRING)
+    private TipoCliente tipo;
+
     private LocalDateTime dataCadastro;
 
     public Cliente() {
     }
 
-    public Cliente(Integer id, String nome, String telefone, String descricao, LocalDateTime dataCadastro) {
+    public Cliente(Integer id, String nome, String telefone, String descricao, TipoCliente tipo, LocalDateTime dataCadastro) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.descricao = descricao;
+        this.tipo = tipo;
         this.dataCadastro = dataCadastro;
     }
 
@@ -62,7 +67,12 @@ public class Cliente {
         this.descricao = descricao;
     }
 
-    public void set() {
+    public TipoCliente getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoCliente tipo) {
+        this.tipo = tipo;
     }
 
     public LocalDateTime getDataCadastro() {

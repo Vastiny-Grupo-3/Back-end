@@ -5,11 +5,13 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import school.sptech.vastiny_projeto.DTO.ClienteVersao.ClienteVersaoResponseDto;
 import school.sptech.vastiny_projeto.DTO.Clientes.ClienteRequestDto;
 import school.sptech.vastiny_projeto.DTO.Clientes.ClienteResponseDto;
 import school.sptech.vastiny_projeto.Mapper.ClienteMapper;
 import school.sptech.vastiny_projeto.Service.ClienteService;
 import school.sptech.vastiny_projeto.entity.Cliente;
+import school.sptech.vastiny_projeto.entity.ClienteVersao;
 
 import java.util.List;
 
@@ -24,6 +26,12 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
+    @GetMapping("/versoes")
+    public ResponseEntity<List<ClienteVersaoResponseDto>> GetAllVersoes() {
+        List<ClienteVersao> clienteVersaoList = this.clienteService.listarVersoes();
+        List<ClienteVersaoResponseDto> dtoResponseList = ClienteMapper.toVersoes(clienteVersaoList);
+        return ResponseEntity.status(200).body(dtoResponseList);
+    }
 
     @GetMapping
     public ResponseEntity<List<ClienteResponseDto>> listar(){

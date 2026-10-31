@@ -1,9 +1,13 @@
 package school.sptech.vastiny_projeto.Mapper;
 
+import school.sptech.vastiny_projeto.DTO.ClienteVersao.ClienteVersaoResponseDto;
 import school.sptech.vastiny_projeto.DTO.Clientes.ClienteRequestDto;
 import school.sptech.vastiny_projeto.DTO.Clientes.ClienteResponseDto;
+import school.sptech.vastiny_projeto.Enums.TipoCliente;
 import school.sptech.vastiny_projeto.entity.Cliente;
+import school.sptech.vastiny_projeto.entity.ClienteVersao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteMapper {
@@ -15,6 +19,7 @@ public class ClienteMapper {
             cliente.setNome(request.getNome());
             cliente.setTelefone(request.getTelefone());
             cliente.setDescricao(request.getDescricao());
+            cliente.setTipo(cliente.getTipo() != null ? cliente.getTipo() : TipoCliente.PESSOA_FISICA);
 
             return cliente;
     }
@@ -27,6 +32,7 @@ public class ClienteMapper {
         dto.setTelefone(cliente.getTelefone());
         dto.setDescricao(cliente.getDescricao());
         dto.setDataCadastro(cliente.getDataCadastro());
+        dto.setTipo(cliente.getTipo());
 
         return dto;
 
@@ -36,4 +42,26 @@ public class ClienteMapper {
         return clientes.stream().map(ClienteMapper::toResponse).toList();
     }
 
+    public static ClienteVersaoResponseDto toVersao(ClienteVersao clienteVersao) {
+        return new ClienteVersaoResponseDto(
+                clienteVersao.getId(),
+                clienteVersao.getCliente().getId(),
+                clienteVersao.getNome(),
+                clienteVersao.getTelefone(),
+                clienteVersao.getDescrica(),
+                clienteVersao.getTipo(),
+                clienteVersao.getCliente().getDataCadastro(),
+                clienteVersao.getDataAlteracao()
+        );
+    }
+
+    public static List<ClienteVersaoResponseDto> toVersoes(List<ClienteVersao> clienteVersaoList) {
+        List<ClienteVersaoResponseDto> dtoList = new ArrayList<>();
+
+        for (ClienteVersao clienteVersao : clienteVersaoList) {
+            dtoList.add(toVersao(clienteVersao));
+        }
+
+        return dtoList;
+    }
 }

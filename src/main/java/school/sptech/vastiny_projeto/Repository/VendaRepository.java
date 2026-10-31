@@ -1,6 +1,7 @@
 package school.sptech.vastiny_projeto.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import school.sptech.vastiny_projeto.DTO.projection.ResumoVendasProjection;
@@ -18,4 +19,8 @@ SELECT COUNT(v)   AS totalVendas,
    WHERE v.dataHora >= :inicio AND v.dataHora < :fim
 """)
     ResumoVendasProjection resumo(@Param("inicio")LocalDateTime inicio, @Param("fim")LocalDateTime fim);
+
+    @Modifying
+    @Query("UPDATE Venda v SET v.cliente = null WHERE v.cliente.id = :clienteId")
+    void desvincularCliente(@Param("clienteId") Integer clienteId);
 }
