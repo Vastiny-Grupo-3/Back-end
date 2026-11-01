@@ -18,7 +18,7 @@ public class ClienteVersao {
 
     private String nome;
     private String telefone;
-    private String descrica;
+    private String descricao;
 
     @Enumerated(EnumType.STRING)
     private TipoCliente tipo;
@@ -28,12 +28,12 @@ public class ClienteVersao {
     public ClienteVersao() {
     }
 
-    public ClienteVersao(Integer id, Cliente cliente, String nome, String telefone, String descrica, TipoCliente tipo, LocalDate dataAlteracao) {
+    public ClienteVersao(Integer id, Cliente cliente, String nome, String telefone, String descricao, TipoCliente tipo, LocalDate dataAlteracao) {
         this.id = id;
         this.cliente = cliente;
         this.nome = nome;
         this.telefone = telefone;
-        this.descrica = descrica;
+        this.descricao = descricao;
         this.tipo = tipo;
         this.dataAlteracao = dataAlteracao;
     }
@@ -70,12 +70,12 @@ public class ClienteVersao {
         this.telefone = telefone;
     }
 
-    public String getDescrica() {
-        return descrica;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescrica(String descrica) {
-        this.descrica = descrica;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public TipoCliente getTipo() {

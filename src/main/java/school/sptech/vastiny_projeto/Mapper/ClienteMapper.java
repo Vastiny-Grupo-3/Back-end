@@ -48,7 +48,7 @@ public class ClienteMapper {
                 clienteVersao.getCliente().getId(),
                 clienteVersao.getNome(),
                 clienteVersao.getTelefone(),
-                clienteVersao.getDescrica(),
+                clienteVersao.getDescricao(),
                 clienteVersao.getTipo(),
                 clienteVersao.getCliente().getDataCadastro(),
                 clienteVersao.getDataAlteracao()
