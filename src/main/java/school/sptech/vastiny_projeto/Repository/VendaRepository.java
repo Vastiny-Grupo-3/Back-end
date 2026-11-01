@@ -11,14 +11,14 @@ import java.time.LocalDateTime;
 
 public interface VendaRepository extends JpaRepository<Venda,Integer> {
 
-    @Query("""
-SELECT COUNT(v)   AS totalVendas,
-   COALESCE(SUM(v.valorTotal), 0) AS faturamento,
-   COALESCE(SUM(v.valorLucro), 0) AS lucro
-   FROM Venda v
-   WHERE v.dataHora >= :inicio AND v.dataHora < :fim
-""")
-    ResumoVendasProjection resumo(@Param("inicio")LocalDateTime inicio, @Param("fim")LocalDateTime fim);
+//    @Query("""
+//SELECT COUNT(v)   AS totalVendas,
+//   COALESCE(SUM(v.valorTotal), 0) AS faturamento,
+//   COALESCE(SUM(v.valorLucro), 0) AS lucro
+//   FROM Venda v
+//   WHERE v.dataHora >= :inicio AND v.dataHora < :fim
+//""")
+//    ResumoVendasProjection resumo(@Param("inicio")LocalDateTime inicio, @Param("fim")LocalDateTime fim);
 
     @Modifying
     @Query("UPDATE Venda v SET v.cliente = null WHERE v.cliente.id = :clienteId")

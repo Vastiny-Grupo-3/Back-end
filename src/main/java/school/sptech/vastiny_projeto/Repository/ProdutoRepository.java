@@ -19,6 +19,7 @@ SELECT
                                AND p.qtdEstoque >= c.nivelRuim THEN 1 ELSE 0 END), 0L) AS ruim,
             COALESCE(SUM(CASE WHEN p.qtdEstoque <  c.nivelRuim THEN 1 ELSE 0 END), 0L) AS critico
           FROM Produto p JOIN p.categoria c
+          WHERE p.ativo = true
           
 """)
     EstoqueResumoProjection estoqueResumo();

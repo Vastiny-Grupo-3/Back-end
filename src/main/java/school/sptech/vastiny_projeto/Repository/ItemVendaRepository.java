@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import school.sptech.vastiny_projeto.DTO.projection.CategoriaVendidaProjection;
+import school.sptech.vastiny_projeto.DTO.projection.ResumoVendasProjection;
 import school.sptech.vastiny_projeto.DTO.projection.TopProdutoProjection;
 import school.sptech.vastiny_projeto.entity.ItemVenda;
 
@@ -34,12 +35,30 @@ SELECT c.nome AS categoria,
           JOIN i.produto p
           JOIN p.categoria c
         WHERE i.venda.dataHora >= :inicio AND i.venda.dataHora < :fim
+            AND (:filtrar = false OR c.id IN :ids)
         GROUP BY p.id, p.codigo1, p.descricao, c.nome
         ORDER BY SUM(i.quantidade) DESC
         """)
     List<TopProdutoProjection> topProdutos(@Param("inicio") LocalDateTime inicio,
                                            @Param("fim") LocalDateTime fim,
+                                           @Param("filtrar") boolean filtrar,
+                                           @Param("ids") List<Integer> ids,
                                            Pageable pageable
                                            );
 
+    @Query("""
+            SELECT COUNT(DISTINCT i.venda.id) AS totalVendas,
+                COALESCE(SUM(i.quantidade * i.precoUnitario), 0) AS faturamento,
+                COALESCE(SUM(i.quantidade * (i.precoUnitario - i.custoUnitario)), 0) AS lucro
+            FROM ItemVenda i
+            JOIN i.produto p
+            JOIN p.categoria c
+            WHERE i.venda.dataHora >= :inicio AND i.venda.dataHora < :fim
+                AND (:filtrar = false OR c.id IN :ids)
+            """)
+    ResumoVendasProjection resumo(
+            @Param("inicio") LocalDateTime inicio,
+            @Param("fim") LocalDateTime fim,
+            @Param("filtrar") boolean filtrar,
+            @Param("ids") List<Integer> ids);
 }
