@@ -1,13 +1,13 @@
 -- Dados fictícios para testar o Dashboard (MySQL, schema criado pelo Hibernate a partir das @Entity).
 -- Rode DEPOIS de subir a aplicação ao menos uma vez (para as tabelas existirem).
--- Os nomes das colunas seguem a convenção do Spring: dataHora -> data_hora, fkPeca -> fk_peca, qtdEstoque -> qtd_estoque.
+-- Os nomes das colunas seguem a convenção do Spring: dataHora -> data_hora, fkProduto -> fk_produto, qtdEstoque -> qtd_estoque.
 -- Período de vendas: 20/08/2026 a 25/10/2026 (inclui vendas ANTES de 03/09 para testar o filtro de datas).
 USE vastiny;
 
 -- Para limpar e rodar de novo (descomente):
 -- SET FOREIGN_KEY_CHECKS = 0;
 -- TRUNCATE item_venda; TRUNCATE venda; TRUNCATE item_carrinho; TRUNCATE carrinho;
--- TRUNCATE movimentacao_estoque; TRUNCATE valor_peca; TRUNCATE peca; TRUNCATE categoria;
+-- TRUNCATE movimentacao_estoque; TRUNCATE valor_produto; TRUNCATE produto; TRUNCATE categoria;
 -- TRUNCATE cliente; TRUNCATE usuario;
 -- SET FOREIGN_KEY_CHECKS = 1;
 
@@ -36,8 +36,8 @@ INSERT INTO categoria (id, nome, nivel_critico, nivel_ruim, nivel_medio, nivel_b
                                                                                         (4, 'Acessórios', 0, 5, 12, 25),
                                                                                         (5, 'Buzinas', 0, 4, 10, 20);
 
--- PECA (qtd_estoque variados para aparecerem Bom, Médio, Ruim e Crítico na aba Estoque)
-INSERT INTO peca (id, descricao, foto, qtd_estoque, codigo1, codigo2, codigo3, codigo4, fk_categoria) VALUES
+-- Produto (qtd_estoque variados para aparecerem Bom, Médio, Ruim e Crítico na aba Estoque)
+INSERT INTO produto (id, descricao, foto, qtd_estoque, codigo1, codigo2, codigo3, codigo4, fk_categoria) VALUES
                                                                                                           (1, 'Soquete Lâmpada H7', NULL, 50, 'SQ-001', NULL, NULL, NULL, 2),
                                                                                                           (2, 'Soquete Lâmpada H4', NULL, 9, 'SQ-002', NULL, NULL, NULL, 2),
                                                                                                           (3, 'Soquete Pingo T10 Universal', NULL, 60, 'SQ-003', 'SQ-003-B', NULL, NULL, 2),
@@ -59,8 +59,8 @@ INSERT INTO peca (id, descricao, foto, qtd_estoque, codigo1, codigo2, codigo3, c
                                                                                                           (19, 'Buzina Moto 12V', NULL, 7, 'BZ-003', NULL, NULL, NULL, 5),
                                                                                                           (20, 'Buzina Ar Pneumática', NULL, 1, 'BZ-004', NULL, NULL, NULL, 5);
 
--- VALOR_PECA (custo_final = custo + custo_ae; preco_venda é o preço de tabela)
-INSERT INTO valor_peca (id, custo, custo_ae, custo_final, preco_venda, fk_peca) VALUES
+-- VALOR_PRODUTO (custo_final = custo + custo_ae; preco_venda é o preço de tabela)
+INSERT INTO valor_produto (id, custo, custo_ae, custo_final, preco_venda, fk_produto) VALUES
                                                                                     (1, 6.50, 0.65, 7.15, 12.50, 1),
                                                                                     (2, 7.00, 0.70, 7.70, 13.90, 2),
                                                                                     (3, 1.20, 0.12, 1.32, 5.65, 3),
@@ -149,7 +149,7 @@ INSERT INTO venda (id, numero_venda, data_hora, valor_total, valor_lucro, fk_cli
                                                                                                       (63, 63, '2026-10-25 16:40:00', 89.30, 52.50, 6, 2);
 
 -- ITEM_VENDA (113 itens; preço e custo unitários gravados na época da venda)
-INSERT INTO item_venda (id, quantidade, preco_unitario, custo_unitario, fk_venda, fk_peca) VALUES
+INSERT INTO item_venda (id, quantidade, preco_unitario, custo_unitario, fk_venda, fk_produto) VALUES
                                                                                                (1, 4, 5.65, 1.20, 1, 3),
                                                                                                (2, 6, 16.90, 8.20, 2, 15),
                                                                                                (3, 1, 27.90, 13.00, 3, 17),
@@ -269,13 +269,13 @@ INSERT INTO carrinho (id_carrinho, data_hora, data_modificacao, status, fk_clien
                                                                                         (1, '2026-10-25 14:10:00', '2026-10-25 14:25:00', 'ABERTO', 3),
                                                                                         (2, '2026-10-25 15:00:00', '2026-10-25 15:02:00', 'ABERTO', NULL);
 
-INSERT INTO item_carrinho (id, data_hora, quantidade, fk_carrinho, fk_peca) VALUES
+INSERT INTO item_carrinho (id, data_hora, quantidade, fk_carrinho, fk_produto) VALUES
                                                                                 (1, '2026-10-25 14:12:00', 2, 1, 3),
                                                                                 (2, '2026-10-25 14:25:00', 1, 1, 5),
                                                                                 (3, '2026-10-25 15:02:00', 4, 2, 13);
 
 -- MOVIMENTACAO_ESTOQUE
-INSERT INTO movimentacao_estoque (id, tipo_movimentacao, quantidade, justificativa, data_hora, fk_peca, fk_usuario) VALUES
+INSERT INTO movimentacao_estoque (id, tipo_movimentacao, quantidade, justificativa, data_hora, fk_produto, fk_usuario) VALUES
                                                                                                                         (1, 'ENTRADA', 50, 'Reposição de fornecedor', '2026-08-21 09:00:00', 3, 1),
                                                                                                                         (2, 'ENTRADA', 30, 'Reposição de fornecedor', '2026-08-25 10:30:00', 1, 2),
                                                                                                                         (3, 'ENTRADA', 40, 'Compra mensal', '2026-09-01 08:45:00', 13, 1),

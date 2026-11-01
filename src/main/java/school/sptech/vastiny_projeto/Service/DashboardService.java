@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import school.sptech.vastiny_projeto.DTO.Dashboard.DashboardDTO;
 import school.sptech.vastiny_projeto.Mapper.DashboardMapper;
 import school.sptech.vastiny_projeto.Repository.ItemVendaRepository;
-import school.sptech.vastiny_projeto.Repository.PecaRepository;
+import school.sptech.vastiny_projeto.Repository.ProdutoRepository;
 import school.sptech.vastiny_projeto.Repository.VendaRepository;
 
 import java.time.LocalDate;
@@ -17,13 +17,13 @@ public class DashboardService {
 
     private final VendaRepository vendaRepository;
     private final ItemVendaRepository itemVendaRepository;
-    private final PecaRepository pecaRepository;
+    private final ProdutoRepository produtoRepository;
     private final DashboardMapper mapper;
 
-    public DashboardService(VendaRepository vendaRepository, ItemVendaRepository itemVendaRepository, PecaRepository pecaRepository, DashboardMapper mapper) {
+    public DashboardService(VendaRepository vendaRepository, ItemVendaRepository itemVendaRepository, ProdutoRepository produtoRepository, DashboardMapper mapper) {
         this.vendaRepository = vendaRepository;
         this.itemVendaRepository = itemVendaRepository;
-        this.pecaRepository = pecaRepository;
+        this.produtoRepository = produtoRepository;
         this.mapper = mapper;
     }
 
@@ -36,7 +36,7 @@ public class DashboardService {
                 mapper.toKpi(vendaRepository.resumo(i, f)),
                 mapper.toCategorias(itemVendaRepository.categorias(i, f, PageRequest.of(0, 5))),
                 mapper.toTopProdutos(itemVendaRepository.topProdutos(i, f, PageRequest.of(0, 10))),
-                mapper.toEstoque(pecaRepository.estoqueResumo())
+                mapper.toEstoque(produtoRepository.estoqueResumo())
         );
     }
 }

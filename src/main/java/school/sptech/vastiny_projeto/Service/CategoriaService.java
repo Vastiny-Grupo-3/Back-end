@@ -5,7 +5,7 @@ import school.sptech.vastiny_projeto.Exception.ConflitoException;
 import school.sptech.vastiny_projeto.Exception.NaoEncontradoException;
 import school.sptech.vastiny_projeto.Exception.ValidacaoException;
 import school.sptech.vastiny_projeto.Repository.CategoriaRepository;
-import school.sptech.vastiny_projeto.Repository.PecaRepository;
+import school.sptech.vastiny_projeto.Repository.ProdutoRepository;
 import school.sptech.vastiny_projeto.entity.Categoria;
 
 import java.util.List;
@@ -15,11 +15,11 @@ import java.util.Optional;
 public class CategoriaService {
 
     private final CategoriaRepository categoriaRepository;
-    private final PecaRepository pecaRepository;
+    private final ProdutoRepository produtoRepository;
 
-    public CategoriaService(CategoriaRepository categoriaRepository, PecaRepository pecaRepository) {
+    public CategoriaService(CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository) {
         this.categoriaRepository = categoriaRepository;
-        this.pecaRepository = pecaRepository;
+        this.produtoRepository = produtoRepository;
     }
 
     public List<Categoria> getAll() {
@@ -65,7 +65,7 @@ public class CategoriaService {
     public void delete(Integer id) {
         Categoria categoria = getById(id);
 
-        if (this.pecaRepository.existsByCategoriaId(id)) {
+        if (this.produtoRepository.existsByCategoriaId(id)) {
             throw new ConflitoException("categoria", "Esta categoria possui produtos e não pode ser excluída.");
         }
 

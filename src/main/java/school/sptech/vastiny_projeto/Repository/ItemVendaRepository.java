@@ -16,7 +16,7 @@ public interface ItemVendaRepository  extends JpaRepository<ItemVenda, Integer> 
 SELECT c.nome AS categoria,
        SUM(i.quantidade * i.precoUnitario) AS faturado
        FROM ItemVenda i
-       JOIN i.peca p
+       JOIN i.produto p
        JOIN p.categoria c 
        WHERE  i.venda.dataHora >= :inicio AND i.venda.dataHora < :fim
        GROUP BY c.nome
@@ -31,7 +31,7 @@ SELECT c.nome AS categoria,
                SUM(i.quantidade * i.precoUnitario) AS faturado,
                SUM(i.quantidade * (i.precoUnitario - i.custoUnitario)) AS lucro
         FROM ItemVenda i
-          JOIN i.peca p
+          JOIN i.produto p
           JOIN p.categoria c
         WHERE i.venda.dataHora >= :inicio AND i.venda.dataHora < :fim
         GROUP BY p.id, p.codigo1, p.descricao, c.nome
