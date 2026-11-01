@@ -2,7 +2,10 @@ package school.sptech.vastiny_projeto.Service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import school.sptech.vastiny_projeto.DTO.Usuario.AtualizarContaRequestDto;
+import school.sptech.vastiny_projeto.Exception.ConflitoException;
 import school.sptech.vastiny_projeto.Exception.NaoEncontradoException;
+import school.sptech.vastiny_projeto.Exception.ValidacaoException;
 import school.sptech.vastiny_projeto.Repository.UsuarioRepository;
 import school.sptech.vastiny_projeto.entity.Usuario;
 
@@ -46,6 +49,10 @@ public class UsuarioService {
     //Post
     public Usuario criar(Usuario usuario){
 
+        if (this.usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
+            throw new ConflitoException("email", "Email já cadastrado em outro login");
+        }
+
         usuario.setDataCadastro(LocalDateTime.now());
         usuario.setSenha(this.passwordEncoder.encode(usuario.getSenha()));
         return usuarioRepository.save(usuario);
@@ -53,19 +60,35 @@ public class UsuarioService {
     }
 
     //Put
-    public Usuario atualizar(Integer id, Usuario usuario){
-        if(!usuarioRepository.existsById(id)){
-            throw new NaoEncontradoException("Usuário não encontrado");
+    public Usuario atualizar(Integer id, AtualizarContaRequestDto dados){
+
+        Usuario usuario = this.buscarPorId(id);
+
+        this.usuarioRepository.findByEmail(dados.getEmail().trim())
+                .filter(outro -> !outro.getId().equals(id))
+                        .ifPresent(outro -> {
+                            throw new ConflitoException("email", "Este e-mail já está em uso.");
+                        });
+
+        if (dados.getNovaSenha() != null && !dados.getNovaSenha().isBlank()) {
+            if (dados.getSenhaAtual() == null || !this.passwordEncoder.matches(dados.getSenhaAtual(), usuario.getSenha())) {
+                throw new ValidacaoException("senhaAtual", "A senha atual não confere.");
+            }
+            usuario.setSenha(passwordEncoder.encode(dados.getNovaSenha()));
         }
 
-        usuario.setId(id);
-        usuario.setSenha(this.passwordEncoder.encode(usuario.getSenha()));
+        usuario.setNome(dados.getNome().trim());
+        usuario.setEmail(dados.getEmail().trim());
         return usuarioRepository.save(usuario);
     }
 
     //delete
-    public void excluir(Integer id){
-        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new NaoEncontradoException("Usuário não encontrado"));
+    public void excluir(Integer id, String senhaAtual){
+        Usuario usuario = this.buscarPorId(id);
+
+        if (!this.passwordEncoder.matches(senhaAtual, usuario.getSenha())) {
+            throw new ValidacaoException("senhaAtual", "A senha atual não confere");
+        }
 
         usuarioRepository.delete(usuario);
     }

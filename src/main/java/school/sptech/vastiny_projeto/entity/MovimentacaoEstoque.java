@@ -19,8 +19,8 @@ public class MovimentacaoEstoque {
     private LocalDateTime dataHora;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "fkPeca", nullable = false)
-    private Peca peca;
+    @JoinColumn(name = "fkProduto", nullable = false)
+    private Produto produto;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "fkUsuario", nullable = false)
@@ -29,13 +29,13 @@ public class MovimentacaoEstoque {
     public MovimentacaoEstoque() {
     }
 
-    public MovimentacaoEstoque(Integer id, String tipoMovimentacao, Integer quantidade, String justificativa, LocalDateTime dataHora, Peca peca, Usuario usuario) {
+    public MovimentacaoEstoque(Integer id, String tipoMovimentacao, Integer quantidade, String justificativa, LocalDateTime dataHora, Produto produto, Usuario usuario) {
         this.id = id;
         this.tipoMovimentacao = tipoMovimentacao;
         this.quantidade = quantidade;
         this.justificativa = justificativa;
         this.dataHora = dataHora;
-        this.peca = peca;
+        this.produto = produto;
         this.usuario = usuario;
     }
 
@@ -79,12 +79,12 @@ public class MovimentacaoEstoque {
         this.dataHora = dataHora;
     }
 
-    public Peca getPeca() {
-        return peca;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setPeca(Peca peca) {
-        this.peca = peca;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public Usuario getUsuario() {

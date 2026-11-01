@@ -1,6 +1,10 @@
 package school.sptech.vastiny_projeto.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class Categoria {
@@ -18,6 +22,13 @@ public class Categoria {
     private Integer nivelMedio;
 
     private Integer nivelBom;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime dataCadastro;
+
+    @UpdateTimestamp
+    private LocalDateTime dataAlteracao;
 
     public Categoria() {
     }

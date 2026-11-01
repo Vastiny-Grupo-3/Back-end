@@ -1,9 +1,13 @@
 package school.sptech.vastiny_projeto.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
-public class Peca {
+public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +31,19 @@ public class Peca {
     @JoinColumn(name = "fkCategoria", nullable = false)
     private Categoria categoria;
 
-    public Peca() {
+    private BigDecimal valorCompra;
+    private BigDecimal precoEmpresa;
+    private BigDecimal precoConsumidor;
+    private Boolean ativo = true;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime dataCadastro;
+
+    public Produto() {
     }
 
-    public Peca(Integer id, String descricao, String foto, Integer qtdEstoque, String codigo1, String codigo2, String codigo3, String codigo4, Categoria categoria) {
+    public Produto(Integer id, String descricao, String foto, Integer qtdEstoque, String codigo1, String codigo2, String codigo3, String codigo4, Categoria categoria, BigDecimal valorCompra, BigDecimal precoEmpresa, BigDecimal precoConsumidor) {
         this.id = id;
         this.descricao = descricao;
         this.foto = foto;
@@ -40,6 +53,9 @@ public class Peca {
         this.codigo3 = codigo3;
         this.codigo4 = codigo4;
         this.categoria = categoria;
+        this.valorCompra = valorCompra;
+        this.precoEmpresa = precoEmpresa;
+        this.precoConsumidor = precoConsumidor;
     }
 
     public Integer getId() {
@@ -112,5 +128,45 @@ public class Peca {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public BigDecimal getValorCompra() {
+        return valorCompra;
+    }
+
+    public void setValorCompra(BigDecimal valorCompra) {
+        this.valorCompra = valorCompra;
+    }
+
+    public BigDecimal getPrecoEmpresa() {
+        return precoEmpresa;
+    }
+
+    public void setPrecoEmpresa(BigDecimal precoEmpresa) {
+        this.precoEmpresa = precoEmpresa;
+    }
+
+    public BigDecimal getPrecoConsumidor() {
+        return precoConsumidor;
+    }
+
+    public void setPrecoConsumidor(BigDecimal precoConsumidor) {
+        this.precoConsumidor = precoConsumidor;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public LocalDateTime getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 }

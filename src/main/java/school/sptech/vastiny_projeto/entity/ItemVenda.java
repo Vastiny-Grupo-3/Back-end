@@ -21,19 +21,19 @@ public class ItemVenda {
     private Venda venda;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "fkPeca", nullable = false)
-    private Peca peca;
+    @JoinColumn(name = "fkProduto", nullable = false)
+    private Produto produto;
 
     public ItemVenda() {
     }
 
-    public ItemVenda(Integer id, Integer quantidade, BigDecimal precoUnitario, BigDecimal custoUnitario, Venda venda, Peca peca) {
+    public ItemVenda(Integer id, Integer quantidade, BigDecimal precoUnitario, BigDecimal custoUnitario, Venda venda, Produto produto) {
         this.id = id;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
         this.custoUnitario = custoUnitario;
         this.venda = venda;
-        this.peca = peca;
+        this.produto = produto;
     }
 
     public Integer getId() {
@@ -76,11 +76,11 @@ public class ItemVenda {
         this.venda = venda;
     }
 
-    public Peca getPeca() {
-        return peca;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setPeca(Peca peca) {
-        this.peca = peca;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 }

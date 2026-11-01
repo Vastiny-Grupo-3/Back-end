@@ -10,6 +10,7 @@ import school.sptech.vastiny_projeto.DTO.Dashboard.DashboardDTO;
 import school.sptech.vastiny_projeto.Service.DashboardService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/dashboard")
@@ -24,7 +25,9 @@ public class DashboardController {
     @GetMapping
     public ResponseEntity<DashboardDTO> GetDashboard(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fim) {
-        return ResponseEntity.ok(service.montar(inicio, fim));
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fim,
+            @RequestParam(required = false) List<Integer> categorias)
+    {
+        return ResponseEntity.ok(service.montar(inicio, fim, categorias));
     }
 }
