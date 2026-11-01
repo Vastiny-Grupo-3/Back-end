@@ -19,18 +19,18 @@ public class ItemCarrinho {
     private Carrinho carrinho;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "fkPeca", nullable = false)
-    private Peca peca;
+    @JoinColumn(name = "fkProduto", nullable = false)
+    private Produto produto;
 
     public ItemCarrinho() {
     }
 
-    public ItemCarrinho(Integer id, LocalDateTime dataHora, Integer quantidade, Carrinho carrinho, Peca peca) {
+    public ItemCarrinho(Integer id, LocalDateTime dataHora, Integer quantidade, Carrinho carrinho, Produto produto) {
         this.id = id;
         this.dataHora = dataHora;
         this.quantidade = quantidade;
         this.carrinho = carrinho;
-        this.peca = peca;
+        this.produto = produto;
     }
 
     public Integer getId() {
@@ -65,11 +65,11 @@ public class ItemCarrinho {
         this.carrinho = carrinho;
     }
 
-    public Peca getPeca() {
-        return peca;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setPeca(Peca peca) {
-        this.peca = peca;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 }

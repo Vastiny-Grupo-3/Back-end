@@ -5,4 +5,7 @@ import school.sptech.vastiny_projeto.entity.Categoria;
 
 public interface CategoriaRepository extends JpaRepository<Categoria,Integer>
 {
+
+    boolean existsByNomeIgnoreCase (String nome);
+    boolean existsByNomeIgnoreCaseAndIdNot (String nome, Integer id);
 }

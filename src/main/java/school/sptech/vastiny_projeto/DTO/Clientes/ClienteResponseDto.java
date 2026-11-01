@@ -1,5 +1,7 @@
 package school.sptech.vastiny_projeto.DTO.Clientes;
 
+import school.sptech.vastiny_projeto.Enums.TipoCliente;
+
 import java.time.LocalDateTime;
 
 public class ClienteResponseDto {
@@ -13,17 +15,20 @@ public class ClienteResponseDto {
 
     private String descricao;
 
+    private TipoCliente tipo;
+
     private LocalDateTime dataCadastro;
 
 
     public ClienteResponseDto() {
     }
 
-    public ClienteResponseDto(Integer id, String nome, String telefone, String descricao, LocalDateTime dataCadastro) {
+    public ClienteResponseDto(Integer id, String nome, String telefone, String descricao, TipoCliente tipo, LocalDateTime dataCadastro) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.descricao = descricao;
+        this.tipo = tipo;
         this.dataCadastro = dataCadastro;
     }
 
@@ -59,6 +64,14 @@ public class ClienteResponseDto {
         this.descricao = descricao;
     }
 
+    public TipoCliente getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoCliente tipo) {
+        this.tipo = tipo;
+    }
+
     public LocalDateTime getDataCadastro() {
         return dataCadastro;
     }
@@ -66,6 +79,4 @@ public class ClienteResponseDto {
     public void setDataCadastro(LocalDateTime dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
-
-
 }
