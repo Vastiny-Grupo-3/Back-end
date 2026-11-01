@@ -13,6 +13,7 @@ public class UsuarioRequestDto {
 
 
     @Pattern(regexp = "^(?=.*[A-Za-zÀ-ÿ])(?=.*\\d).{8,}$", message = "A senha não atende aos requesitos de segurança.")
+    @NotBlank(message = "Informe a senha.")
     private String senha;
 
     public UsuarioRequestDto() {

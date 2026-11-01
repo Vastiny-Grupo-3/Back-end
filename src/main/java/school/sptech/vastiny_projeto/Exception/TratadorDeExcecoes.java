@@ -11,10 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class TratadorDeExcecoes extends RuntimeException {
-    public TratadorDeExcecoes(String message) {
-        super(message);
-    }
+public class TratadorDeExcecoes {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> validacao(MethodArgumentNotValidException ex) {

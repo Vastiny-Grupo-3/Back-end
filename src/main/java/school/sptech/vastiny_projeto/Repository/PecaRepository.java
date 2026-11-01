@@ -18,4 +18,6 @@ SELECT
           
 """)
     EstoqueResumoProjection estoqueResumo();
+
+    boolean existsByCategoriaId(Integer categoriaId);
 }

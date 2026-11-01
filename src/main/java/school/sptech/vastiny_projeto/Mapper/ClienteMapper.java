@@ -19,7 +19,7 @@ public class ClienteMapper {
             cliente.setNome(request.getNome());
             cliente.setTelefone(request.getTelefone());
             cliente.setDescricao(request.getDescricao());
-            cliente.setTipo(cliente.getTipo() != null ? cliente.getTipo() : TipoCliente.PESSOA_FISICA);
+            cliente.setTipo(request.getTipo() != null ? request.getTipo() : TipoCliente.PESSOA_FISICA);
 
             return cliente;
     }

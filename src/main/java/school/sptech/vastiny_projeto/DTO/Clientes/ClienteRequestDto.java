@@ -6,10 +6,10 @@ import school.sptech.vastiny_projeto.Enums.TipoCliente;
 
 public class ClienteRequestDto {
 
-    @NotBlank
+    @NotBlank(message = "Insira um nome")
     private String nome;
 
-    @NotBlank
+    @NotBlank(message = "Insira um telefone")
     private String telefone;
 
     private String descricao;
