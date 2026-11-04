@@ -1,5 +1,8 @@
 package school.sptech.vastiny_projeto.Controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +15,7 @@ import school.sptech.vastiny_projeto.Mapper.AuthMapper;
 import school.sptech.vastiny_projeto.Service.AuthService;
 import school.sptech.vastiny_projeto.entity.Usuario;
 
+@Tag(name = "Autenticação", description = "Login e geração do token JWT")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -22,6 +26,7 @@ public class AuthController {
         this.authService = authService;
     }
 
+    @Operation(summary = "Realizar login", description = "Autentica o usuário com e-mail e senha e retorna o token JWT usado no cabeçalho Authorization (Bearer). Endpoint público.")
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login(
             @Valid @RequestBody AuthRequestDto dto

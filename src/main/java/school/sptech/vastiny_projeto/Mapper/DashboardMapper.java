@@ -5,6 +5,7 @@ import school.sptech.vastiny_projeto.DTO.Dashboard.CategoriaVendidaDTO;
 import school.sptech.vastiny_projeto.DTO.Dashboard.EstoqueDTO;
 import school.sptech.vastiny_projeto.DTO.Dashboard.KpiVendasDTO;
 import school.sptech.vastiny_projeto.DTO.Dashboard.TopProdutoDTO;
+import school.sptech.vastiny_projeto.DTO.Dashboard.VendasDTO;
 import school.sptech.vastiny_projeto.DTO.projection.CategoriaVendidaProjection;
 import school.sptech.vastiny_projeto.DTO.projection.EstoqueResumoProjection;
 import school.sptech.vastiny_projeto.DTO.projection.ResumoVendasProjection;
@@ -47,5 +48,11 @@ public class DashboardMapper {
         long ruim = e.getRuim() == null ? 0 : e.getRuim();
         long critico = e.getCritico() == null ? 0 : e.getCritico();
          return  new EstoqueDTO(bom, medio, ruim, critico, ruim + critico);
+    }
+
+    public static VendasDTO toVendas(ResumoVendasProjection resumo,
+                                     List<CategoriaVendidaProjection> categorias,
+                                     List<TopProdutoProjection> topProdutos) {
+        return new VendasDTO(toKpi(resumo), toCategorias(categorias), toTopProdutos(topProdutos));
     }
 }

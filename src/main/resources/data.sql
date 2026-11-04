@@ -15,9 +15,9 @@ USE vastiny;
 
 -- USUARIO (senha em BCrypt: Vastiny123)
 INSERT INTO usuario (id, nome, email, senha, data_cadastro) VALUES
-  (2, 'Administrador', 'admin@vastiny.com', '$2a$10$py5DPZeAqyPkSlDhlWi.O.Q1u3VvXfrcYpfzJ.Yo.hiGimD0wyAR.', '2026-08-01 09:00:00'),
-  (3, 'Mariana Souza', 'mariana@vastiny.com', '$2a$10$py5DPZeAqyPkSlDhlWi.O.Q1u3VvXfrcYpfzJ.Yo.hiGimD0wyAR.', '2026-08-01 09:10:00'),
-  (4, 'Carlos Lima', 'carlos@vastiny.com', '$2a$10$py5DPZeAqyPkSlDhlWi.O.Q1u3VvXfrcYpfzJ.Yo.hiGimD0wyAR.', '2026-08-05 14:30:00');
+  (1, 'Administrador', 'admin@vastiny.com', '$2a$10$py5DPZeAqyPkSlDhlWi.O.Q1u3VvXfrcYpfzJ.Yo.hiGimD0wyAR.', '2026-08-01 09:00:00'),
+  (2, 'Mariana Souza', 'mariana@vastiny.com', '$2a$10$py5DPZeAqyPkSlDhlWi.O.Q1u3VvXfrcYpfzJ.Yo.hiGimD0wyAR.', '2026-08-01 09:10:00'),
+  (3, 'Carlos Lima', 'carlos@vastiny.com', '$2a$10$py5DPZeAqyPkSlDhlWi.O.Q1u3VvXfrcYpfzJ.Yo.hiGimD0wyAR.', '2026-08-05 14:30:00');
 
 -- CLIENTE (tipo: PESSOA_FISICA ou EMPRESA; ids 2, 4 e 6 são empresas)
 INSERT INTO cliente (id, nome, telefone, descricao, tipo, data_cadastro) VALUES

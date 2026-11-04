@@ -1,5 +1,8 @@
 package school.sptech.vastiny_projeto.Controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import school.sptech.vastiny_projeto.entity.Usuario;
 
 import java.util.List;
 
+@Tag(name = "Usuários", description = "Cadastro e gerenciamento da conta do usuário logado")
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -38,6 +42,7 @@ public class UsuarioController {
 //        return ResponseEntity.status(200).body(UsuarioMapper.toResponse(usuarioId));
 //    }
 
+    @Operation(summary = "Consultar minha conta", description = "Retorna os dados do usuário autenticado (identificado pelo token JWT).")
     @GetMapping("/me")
     public ResponseEntity<UsuarioResponseDto> minhaConta(Authentication authentication) {
         Integer id = (Integer) authentication.getPrincipal();
@@ -46,6 +51,7 @@ public class UsuarioController {
         return ResponseEntity.status(200).body(dtoResponse);
     }
 
+    @Operation(summary = "Cadastrar usuário", description = "Cria uma nova conta de usuário e retorna os dados criados (201). Endpoint público.")
     @PostMapping
     public ResponseEntity<UsuarioResponseDto> criar(@RequestBody @Valid UsuarioRequestDto request){
         Usuario usuarioRequest = UsuarioMapper.toEntity(request);
@@ -55,6 +61,7 @@ public class UsuarioController {
         return ResponseEntity.status(201).body(UsuarioMapper.toResponse(salvo));
     }
 
+    @Operation(summary = "Atualizar minha conta", description = "Atualiza os dados do usuário autenticado.")
     @PutMapping("/me")
     public ResponseEntity<UsuarioResponseDto> atualizarMinhaConta(
             Authentication authentication,
@@ -66,6 +73,7 @@ public class UsuarioController {
         return ResponseEntity.status(200).body(dtoResponse);
     }
 
+    @Operation(summary = "Excluir minha conta", description = "Exclui a conta do usuário autenticado, exigindo a senha atual no corpo da requisição. Retorna 204 sem corpo.")
     @DeleteMapping("/me")
     public ResponseEntity<Void> excluirMinhaConta(
             Authentication authentication,
